@@ -6,7 +6,7 @@ format = pyaudio.paInt16
 channels = 1
 rate = 44100
 
-p =pyaudio.Pyaudio()
+p = pyaudio.PyAudio()
 
 stream = p.open(format=format
                 ,channels=channels
@@ -21,3 +21,16 @@ seconds = 10
 for i in range(0, int(rate / chunk *seconds)):
     data = stream.read(chunk)
     frames.append(data)
+
+print("recording done")
+
+stream.stop_stream()
+stream.close()
+p.terminate()
+
+wf = wave.open("output.wav", 'wb')
+wf.setnchannels(channels)
+wf.setsampwidth(p.get_sample_size(format))
+wf.setframerate(rate)
+wf.writeframes(b''.join(frames))
+wf.close
