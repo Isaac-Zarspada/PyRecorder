@@ -13,7 +13,6 @@ stream = p.open(format=format
                 ,rate=rate
                 ,input=True
                 ,frames_per_buffer=chunk)
-
 print("start recording...")
 
 frames = []
